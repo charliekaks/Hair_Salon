@@ -13,12 +13,12 @@ public class App {
         staticFileLocation("/public");
         String layout = "templates/layout.vtl";
 
-        get("/stylist", (request, response) ->{
-            Map<String, Object> model = new HashMap<String, Object>();
-            model.put("stylist", Stylist.all());
-            model.put("template", "templates/.vtl");
-            return new ModelAndView(model, layout);
-        },new VelocityTemplateEngine());
+        // get("/stylist", (request, response) ->{
+        //     Map<String, Object> model = new HashMap<String, Object>();
+        //     model.put("stylist", Stylist.all());
+        //     model.put("template", "templates/stylist.vtl");
+        //     return new ModelAndView(model, layout);
+        // },new VelocityTemplateEngine());
 
         get("/", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
@@ -57,6 +57,21 @@ public class App {
             return new ModelAndView(model, layout); 
         },new VelocityTemplateEngine());
 
-        
+        get("/stylist/:id", (request, response)->{
+        Map<String, Object> model = new HashMap<String, Object>(); 
+        Stylist mystylist = Stylist.find(Integer.parseInt(request.params(":id")));
+        model.put("stylist", mystylist);
+        model.put("template", "templates/stylist.vtl");   
+        return new ModelAndView(model, layout);
+        },new VelocityTemplateEngine());
+
+        post("/stylist/:id/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Stylist myStylist = Stylist.find(Integer.parseInt(request.params(":id")));
+            myStylist.delete();
+            model.put("stylist", myStylist);
+            model.put("template", "templates/success.vtl");
+            return new ModelAndView(model, layout);
+          }, new VelocityTemplateEngine());
     }
 }

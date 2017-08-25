@@ -1,6 +1,6 @@
 #if($stylists)
     #foreach($stylist in $stylists)
-        <li>$stylist.getName()</li>
+        <li><a href="/stylist/$stylist.getId()">$stylist.getName()</a></li>
     #end
 #else
     <p>No stylist</p>

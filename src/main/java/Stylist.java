@@ -35,6 +35,10 @@ public class Stylist{
         return phoneNumber;
     }
 
+    public int getId(){
+        return id;
+    }
+
     public void save(){
         try(Connection con = DB.sql2o.open()){
             String sql = "INSERT INTO stylists (stylistName, phoneNumber) VALUES (:stylistName, :phoneNumber)";
@@ -55,7 +59,7 @@ public class Stylist{
 
     public static Stylist find(int id){
         try(Connection con = DB.sql2o.open()){
-        String sql = "SELECT id, stylists Where id=:id";
+        String sql = "SELECT * FROM stylists WHERE id=:id";
         Stylist mystylist = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Stylist.class);
@@ -81,6 +85,15 @@ public class Stylist{
             con.createQuery(sql)
             .addParameter("id", id)
             .executeUpdate();
+        }
+    }
+
+    public List<Client> getClients(){
+        try(Connection con = DB.sql2o.open()){
+            String sql="SELECT * FROM clients WHERE stylistid=:id";
+            return con.createQuery(sql)
+            .addParameter("id", this.id)
+            .executeAndFetch(Client.class);
         }
     }
 }
