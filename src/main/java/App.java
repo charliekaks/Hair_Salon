@@ -34,6 +34,13 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
+        get("/clients", (request, response) ->{
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put("clients", Client.all());
+            model.put("template", "templates/clients.vtl");
+            return new ModelAndView(model, layout);
+        },new VelocityTemplateEngine());
+
 
         post("/stylist", (request, response)->{
             Map<String, Object> model = new HashMap<String, Object>();
@@ -71,6 +78,36 @@ public class App {
             myStylist.delete();
             model.put("stylist", myStylist);
             model.put("template", "templates/success.vtl");
+            return new ModelAndView(model, layout);
+          }, new VelocityTemplateEngine());
+
+          post("/clients/:id/delete", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Client myClient = Client.find(Integer.parseInt(request.params(":id")));
+            myClient.delete();
+            model.put("Client", myClient);
+            model.put("template", "templates/success.vtl");
+            return new ModelAndView(model, layout);
+          }, new VelocityTemplateEngine());
+
+
+          post("/stylist/:id/update", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
+            String name = request.queryParams("stylistName");
+            int phone = Integer.parseInt(request.queryParams("stylistNumber"));
+            stylist.update(name, phone);
+            response.redirect("/");
+            return new ModelAndView(model, layout);
+          }, new VelocityTemplateEngine());
+
+          post("/stylist/:id/update", (request, response) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
+            String name = request.queryParams("stylistName");
+            int phone = Integer.parseInt(request.queryParams("stylistNumber"));
+            stylist.update(name, phone);
+            response.redirect("/");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
     }

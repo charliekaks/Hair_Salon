@@ -67,12 +67,12 @@ public class Stylist{
     }
     }
 
-    public void update(String stylistName, int phone){
+    public void update(String stylistName, int phoneNumber){
         try(Connection con = DB.sql2o.open()){
-            String sql = "UPDATE clients SET stylistName= :stylistName, phoneNumber=:phoneNumber WHERE id=:id";
+            String sql = "UPDATE stylists SET stylistName= :stylistName, phoneNumber= :phoneNumber WHERE id=:id";
             con.createQuery(sql)
             .addParameter( "stylistName", stylistName)
-            .addParameter("phonNumber", phoneNumber)
+            .addParameter("phoneNumber", phoneNumber)
             .addParameter("id",id)
             .executeUpdate();
         }

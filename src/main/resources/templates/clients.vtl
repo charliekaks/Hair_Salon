@@ -1,0 +1,8 @@
+<h3></h3>
+
+#foreach($client in $clients)
+<p>$client.getName()</p>
+<form action="/clients/$client.getId()/delete" method="post">
+        <button class="btn btn-danger" id="delete">Delete</button>
+ </form>
+#end
