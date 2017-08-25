@@ -1,0 +1,16 @@
+#if($stylists)
+    #foreach($stylist in $stylists)
+        <li>$stylist.getName()</li>
+    #end
+#else
+    <p>No stylist</p>
+#end
+
+<form action="/stylist" method="post">
+    <label for="">Stylist Name</label>
+    <input type="text" id="stylistName" name="stylistName" class="form-control">
+    <label for="">Stylist Number</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control">
+    <button type="submit">add stylist</button>
+
+</form>
