@@ -37,7 +37,7 @@ Thumbs.db
 build/
 .gradle/
 
-.classpath
-project
-settings/org.eclipse.buildship.core.prefs
-vscode/settings.json
+*.classpath
+*.project
+*.settings/org.eclipse.buildship.core.prefs
+*.vscode/settings.json
