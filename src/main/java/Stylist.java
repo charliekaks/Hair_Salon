@@ -62,4 +62,25 @@ public class Stylist{
         return mystylist;
     }
     }
+
+    public void update(String stylistName, int phone){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "UPDATE clients SET stylistName= :stylistName, phoneNumber=:phoneNumber WHERE id=:id";
+            con.createQuery(sql)
+            .addParameter( "stylistName", stylistName)
+            .addParameter("phonNumber", phoneNumber)
+            .addParameter("id",id)
+            .executeUpdate();
+        }
+
+    }
+
+    public void delete(){
+        try(Connection con = DB.sql2o.open()){
+            String sql = "DELETE FROM stylists WHERE id=:id";
+            con.createQuery(sql)
+            .addParameter("id", id)
+            .executeUpdate();
+        }
+    }
 }
