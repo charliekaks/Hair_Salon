@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
         String layout = "templates/layout.vtl";
-        //get method thattakes you to the individual client
+        //get method that takes you to the individual client
         get("/clients/:id", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
             Client myClient = Client.find(Integer.parseInt(request.params(":id")));
@@ -37,7 +37,7 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
-        //the get method that routes you tp all the clients 
+        //the get method that routes you to all the clients 
         get("/clients", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("clients", Client.all());

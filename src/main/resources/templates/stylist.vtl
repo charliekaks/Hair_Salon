@@ -10,10 +10,46 @@
         <button class="btn btn-danger" id="delete">Delete</button>
  </form>
 
- <form action="/stylist/$stylist.getId()/update" method="post">
-        <label for="stylistName">Stylist Name</label>
-        <input type="text" id="stylistName" name="stylistName" class="form-control">
-        <label for="stylistNumber">Stylist Number</label>
-        <input type="text" id="stylistNumber" name="stylistNumber" class="form-control">
-        <button class="btn btn-danger" id="update">Delete</button>
- </form>
+
+ <div class="row">
+  <div class="col-xs-2 col-xs-offset-5 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 col-lg-2 col-lg-offset-5">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModa">
+          Add A Client
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModa" tabindex="-1" role="dialog" aria-labelledby="myModalLabe">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabe">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                  <form action="/stylist/$stylist.getId()/update" method="post">
+                    <label for="stylistName">Stylist Name</label>
+                    <input type="text" id="stylistName" name="stylistName" class="form-control">
+                    <label for="stylistNumber">Stylist Number</label>
+                    <input type="text" id="stylistNumber" name="stylistNumber" class="form-control">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button  class="btn btn-danger" type="submit" id="update"> Update a Client</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+##  <form action="/stylist/$stylist.getId()/update" method="post">
+##         <label for="stylistName">Stylist Name</label>
+##         <input type="text" id="stylistName" name="stylistName" class="form-control">
+##         <label for="stylistNumber">Stylist Number</label>
+##         <input type="text" id="stylistNumber" name="stylistNumber" class="form-control">
+##         <button class="btn btn-danger" >Update</button>
+##  </form>

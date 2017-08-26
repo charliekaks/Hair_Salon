@@ -1,16 +1,51 @@
 #if($stylists)
     #foreach($stylist in $stylists)
-        <li><a href="/stylist/$stylist.getId()">$stylist.getName()</a></li>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <li><a href="/stylist/$stylist.getId()">$stylist.getName()</a></li>
+        </div>
+      </div>
     #end
 #else
     <p>No stylist</p>
 #end
+  <div class="row">
+  <div class="col-xs-2 col-xs-offset-5 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 col-lg-2 col-lg-offset-5">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+          Launch demo modal
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <form action="/stylist" method="post">
+                  <label for="">Stylist Name</label>
+                  <input type="text" id="stylistName" name="stylistName" class="form-control">
+                  <label for="">Stylist Number</label>
+                  <input type="text" id="phoneNumber" name="phoneNumber" class="form-control">           
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button  class="btn btn-primary" type="submit" >Save changes</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+## <form action="/stylist" method="post">
+##     <label for="">Stylist Name</label>
+##     <input type="text" id="stylistName" name="stylistName" class="form-control">
+##     <label for="">Stylist Number</label>
+##     <input type="text" id="phoneNumber" name="phoneNumber" class="form-control">
+##     <button type="submit">add stylist</button>
 
-<form action="/stylist" method="post">
-    <label for="">Stylist Name</label>
-    <input type="text" id="stylistName" name="stylistName" class="form-control">
-    <label for="">Stylist Number</label>
-    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control">
-    <button type="submit">add stylist</button>
-
-</form>
+## </form>
