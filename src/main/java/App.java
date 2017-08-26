@@ -12,14 +12,16 @@ public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
         String layout = "templates/layout.vtl";
+        //get method thattakes you to the individual client
+        get("/clients/:id", (request, response) ->{
+            Map<String, Object> model = new HashMap<String, Object>();
+            Client myClient = Client.find(Integer.parseInt(request.params(":id")));
+            model.put("client", myClient);
+            model.put("template", "templates/update-client.vtl");
+            return new ModelAndView(model, layout);
+        },new VelocityTemplateEngine());
 
-        // get("/stylist", (request, response) ->{
-        //     Map<String, Object> model = new HashMap<String, Object>();
-        //     model.put("stylist", Stylist.all());
-        //     model.put("template", "templates/stylist.vtl");
-        //     return new ModelAndView(model, layout);
-        // },new VelocityTemplateEngine());
-
+        //get route for the index page
         get("/", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("stylists",Stylist.all());
@@ -27,6 +29,7 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
+        //get method that takes you to the client form page
         get("/client", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("stylists", Stylist.all());
@@ -34,6 +37,7 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
+        //the get method that routes you tp all the clients 
         get("/clients", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
             model.put("clients", Client.all());
@@ -41,7 +45,7 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
-
+        //the post method that is responsible for saving a new stylist in the DB
         post("/stylist", (request, response)->{
             Map<String, Object> model = new HashMap<String, Object>();
             String name = request.queryParams("stylistName");
@@ -52,6 +56,7 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
+        //the post method that is responsible for saving a new clients in the DB
         post("/client", (request, response)->{
             Map<String, Object> model = new HashMap<String, Object>();
             String name = request.queryParams("clientName");
@@ -64,6 +69,7 @@ public class App {
             return new ModelAndView(model, layout); 
         },new VelocityTemplateEngine());
 
+        //the get method that routes you to a specific stylist
         get("/stylist/:id", (request, response)->{
         Map<String, Object> model = new HashMap<String, Object>(); 
         Stylist mystylist = Stylist.find(Integer.parseInt(request.params(":id")));
@@ -72,6 +78,7 @@ public class App {
         return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
+        //the post method responsible for deleting a specific stylist
         post("/stylist/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             Stylist myStylist = Stylist.find(Integer.parseInt(request.params(":id")));
@@ -80,8 +87,9 @@ public class App {
             model.put("template", "templates/success.vtl");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
-
-          post("/clients/:id/delete", (request, response) -> {
+        
+        //the post method responsible for deleting a specific client
+        post("/clients/:id/delete", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             Client myClient = Client.find(Integer.parseInt(request.params(":id")));
             myClient.delete();
@@ -90,7 +98,7 @@ public class App {
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
 
-
+          //the post method responsible for updating a specific stylist 
           post("/stylist/:id/update", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
@@ -101,12 +109,13 @@ public class App {
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
 
-          post("/stylist/:id/update", (request, response) -> {
+          //the post method responsible for updating a specific client
+          post("/clients/:id/update", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
-            Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
-            String name = request.queryParams("stylistName");
-            int phone = Integer.parseInt(request.queryParams("stylistNumber"));
-            stylist.update(name, phone);
+            Client client = Client.find(Integer.parseInt(request.params(":id")));
+            String name = request.queryParams("clientName");
+            int phone = Integer.parseInt(request.queryParams("clientNumber"));
+            client.update(name, phone);
             response.redirect("/");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
