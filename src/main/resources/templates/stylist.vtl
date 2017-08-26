@@ -1,13 +1,19 @@
 <h3>$stylist.getName() Clients:</h3>
-
-<ul>
-    #foreach($stylist in $stylist.getClients())
-    <li>$stylist.getName()</li>
-    #end
-</ul>
+<div class="row">
+      #foreach($stylist in $stylist.getClients())
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <div class="well">
+              <h4>Client Name:</h4>
+              <li>$stylist.getName()</li>
+              <h4>Client Number:</h4>
+              <li>$stylist.getPhoneNumber()</li>
+            </div>
+          </div>
+  #end
+</div>
 
  <form action="/stylist/$stylist.getId()/delete" method="post">
-        <button class="btn btn-danger" id="delete">Delete</button>
+        <button class="btn btn-danger" id="delete">Delete a Stylist</button>
  </form>
 
 
@@ -15,7 +21,7 @@
   <div class="col-xs-2 col-xs-offset-5 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-5 col-lg-2 col-lg-offset-5">
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModa">
-          Add A Client
+         Update a Stylist
         </button>
         
         <!-- Modal -->

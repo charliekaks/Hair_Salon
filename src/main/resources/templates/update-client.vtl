@@ -1,7 +1,12 @@
-<form action="/clients/$client.getId()/update" method="post">
-        <label for="clientName">client Name</label>
-        <input type="text" id="clientName" name="clientName" class="form-control">
-        <label for="clientNumber">client Number</label>
-        <input type="text" id="clientNumber" name="clientNumber" class="form-control">
-        <button class="btn btn-danger" id="update">Delete</button>
- </form>
+
+<div class="row">
+    <div class="col-md-7 col-md-offset-2">
+        <form action="/clients/$client.getId()/update" method="post">
+                <label for="clientName" class="ffr">client Name</label>
+                <input type="text" id="clientName" name="clientName" class="form-control">
+                <label for="clientNumber" class="ffr">client Number</label>
+                <input type="text" id="clientNumber" name="clientNumber" class="form-control">
+                <button class="btn btn-danger" id="update">Delete</button>
+        </form>
+    </div>
+</div>
