@@ -29,14 +29,6 @@ public class App {
             return new ModelAndView(model, layout);
         },new VelocityTemplateEngine());
 
-        //get method that takes you to the client form page
-        get("/client", (request, response) ->{
-            Map<String, Object> model = new HashMap<String, Object>();
-            model.put("stylists", Stylist.all());
-            model.put("template", "templates/client.vtl");
-            return new ModelAndView(model, layout);
-        },new VelocityTemplateEngine());
-
         //the get method that routes you to all the clients 
         get("/clients", (request, response) ->{
             Map<String, Object> model = new HashMap<String, Object>();
@@ -116,7 +108,7 @@ public class App {
             String name = request.queryParams("clientName");
             int phone = Integer.parseInt(request.queryParams("clientNumber"));
             client.update(name, phone);
-            response.redirect("/");
+            response.redirect("/clients");
             return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
     }
